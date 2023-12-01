@@ -39,7 +39,7 @@ function App() {
     <div className="app">
       <h1>Patxi Subs</h1>
       <List subs={subs} />
-      <Form />
+      <Form onNewSub={setSubs} />
     </div>
   )
 }
