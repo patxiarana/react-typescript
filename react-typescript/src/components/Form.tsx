@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { Sub } from "../types";
+interface FormState {
+    inputValues: Sub
+}
+
+
 
 const Form = () => {
 
 
-    const [inputValues, setInputValues] = useState({
+    const [inputValues, setInputValues] = useState<FormState["inputValues"]>({
         nick: '',
         subMonths: 0,
         avatar: '',
@@ -11,11 +17,11 @@ const Form = () => {
     })
     const handlesubmit = () => { }
 
-    const handlechange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement >) => {
+    const handlechange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValues({
             ...inputValues,
             [e.target.name]: e.target.value
-         } )
+        })
     }
 
     return (
@@ -23,7 +29,7 @@ const Form = () => {
             <form onSubmit={handlesubmit}>
                 <input onChange={handlechange} value={inputValues.nick} type="text" name="nick" placeholder="nick" />
                 <input onChange={handlechange} value={inputValues.subMonths} type="text" name="subMonths" placeholder="subMonths" />
-                <textarea onChange={handlechange} value={inputValues.description}  name="description" placeholder="description" />
+                <textarea onChange={handlechange} value={inputValues.description} name="description" placeholder="description" />
                 <input onChange={handlechange} value={inputValues.avatar} type="text" name="avatar" placeholder="avatar" />
             </form>
 
