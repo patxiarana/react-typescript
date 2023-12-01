@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { useEffect, useState } from 'react'
+import List from './components/List'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const INITIAL_STATE = [
+  {
+    nick : 'dapelu',
+    subMonths : 3 ,
+    avatar : "https://i.pravatar.cc/150?img=3",
+    description : "hace aveces de moderador"
+  },
+  {
+    nick : 'sergio_cerrano',
+    subMonths : 3 ,
+    avatar : "https://i.pravatar.cc/150?img=4",
+  
+  },
+]
+
+
+
+interface Sub {
+  nick: string ,
+  avatar: string,
+  subMonths: number,
+  description?: string
+}
+
+
+interface AppState {
+  subs:Array<Sub>
+  newSubsNumber : number 
+}
+
+
+
+
+function App() {
+const  [subs, setSubs] = useState<AppState['subs']>([])
+const [newSubsNumber, setnewSubsNumber] = useState<AppState['newSubsNumber']>(0)
+
+useEffect(()=>{
+  setSubs(INITIAL_STATE)
+}, [])
+
+return (
+  <div className="app">
+<h1>Patxi Subs</h1>
+
+ </div>
+)
 }
 
 export default App
