@@ -1,9 +1,11 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import List from './components/List'
 import './App.css'
 import Form from './components/Form'
 import { Sub } from './types'
+
+
 const INITIAL_STATE = [
   {
     nick: 'dapelu',
@@ -30,16 +32,21 @@ interface AppState {
 function App() {
   const [subs, setSubs] = useState<AppState['subs']>([])
   const [newSubsNumber, setnewSubsNumber] = useState<AppState['newSubsNumber']>(0)
+const divRef =useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setSubs(INITIAL_STATE)
   }, [])
 
+  const handlenewsub = (newSub : Sub) : void => {
+    setSubs(subs => [...subs,newSub])
+  }
+
   return (
-    <div className="app">
+    <div className="app" ref={divRef}>
       <h1>Patxi Subs</h1>
       <List subs={subs} />
-      <Form onNewSub={setSubs} />
+      <Form onNewSub={handlenewsub} />
     </div>
   )
 }

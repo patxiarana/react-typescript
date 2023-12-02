@@ -5,23 +5,28 @@ interface FormState {
 }
 
 interface FormProps {
-    onNewSub: React.Dispatch<React.SetStateAction<Sub[]>>
+    onNewSub: (newSub: Sub) => void
 
 }
+
+const INITIAL_STATE = {
+    nick: '',
+    subMonths: 0,
+    avatar: '',
+    description: '',
+}
+
+
 
 const Form = ({ onNewSub }: FormProps) => {
 
 
-    const [inputValues, setInputValues] = useState<FormState["inputValues"]>({
-        nick: '',
-        subMonths: 0,
-        avatar: '',
-        description: '',
-    })
+    const [inputValues, setInputValues] = useState<FormState["inputValues"]>(INITIAL_STATE)
 
     const handlesubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        onNewSub(subs => ([...subs, inputValues]))
+        onNewSub(inputValues)
+        handleClear()
     }
 
     const handlechange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -29,7 +34,10 @@ const Form = ({ onNewSub }: FormProps) => {
             ...inputValues,
             [e.target.name]: e.target.value
         })
-        //   console.log(setInputValues)
+    }
+
+    const handleClear = () => {
+      setInputValues(INITIAL_STATE)
     }
 
     return (
@@ -39,6 +47,7 @@ const Form = ({ onNewSub }: FormProps) => {
                 <input onChange={handlechange} value={inputValues.subMonths} type="text" name="subMonths" placeholder="subMonths" />
                 <textarea onChange={handlechange} value={inputValues.description} name="description" placeholder="description" />
                 <input onChange={handlechange} value={inputValues.avatar} type="text" name="avatar" placeholder="avatar" />
+                <button onClick={handleClear} type="button">Clear The Form</button>
                 <button type="submit">Save a new sub</button>
             </form>
         </div>
