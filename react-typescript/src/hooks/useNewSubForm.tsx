@@ -4,7 +4,7 @@ import { Sub } from "../types"
 
 
 interface FormState {
-   InputValues:Sub
+    InputValues: Sub
 }
 
 type FormReducerAction = {
@@ -45,7 +45,7 @@ const formReducer = (state: FormState['InputValues'], action: FormReducerAction)
 
 
 const useNewSubForm = () => {
-   return useReducer(formReducer,INITIAL_STATE)
+    return useReducer(formReducer, INITIAL_STATE)
 }
 
 
